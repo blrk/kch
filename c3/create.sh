@@ -1,7 +1,9 @@
 #!/bin/bash
+ 
 
 # Array of namespaces
-namespaces=("mtvlabk8su1" "mtvlabk8su2" "mtvlabk8su3")
+#namespaces=("mtvlabk8su1" "mtvlabsk8su2" "mtvlabk8su3" "mtvlabk8su4" "mtvlabk8su5" "mtvlabk8su6" "mtvlabk8su7" "mtvlabk8su8" "mtvlabk8su9" "mtvlabk8su10" "mtvlabk8su11" "mtvlabk8su12" "mtvlabk8su13" "mtvlabk8su14") 
+namespaces=("mtvlabk8sa1")
 
  # Pathto your Kubernetes manifest files
 postgres_deployment_file="postgres-deploy.yml" # Make sure these paths are correct

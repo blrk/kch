@@ -1,7 +1,9 @@
 #!/bin/bash
 
 # Array of namespaces
-namespaces=("mtvlabk8su1" "mtvlabk8su2" "mtvlabk8su3")
+##namespaces=("mtvlabk8su1" "mtvlabk8su2" "mtvlabk8su3")
+#namespaces=("mtvlabk8su1" "mtvlabsk8su2" "mtvlabk8su3" "mtvlabk8su4" "mtvlabk8su5" "mtvlabk8su6" "mtvlabk8su7" "mtvlabk8su8" "mtvlabk8su9" "mtvlabk8su10" "mtvlabk8su11" "mtvlabk8su12" "mtvlabk8su13" "mtvlabk8su14") 
+namespaces=("mtvlabk8sa1")
 
  # Pathto your Kubernetes manifest files
 postgres_deployment_file="postgres-deploy.yml" # Make sure these paths are correct
@@ -13,20 +15,20 @@ secret_file="secret.yml"
 # Deploy PostgreSQL to the given namespace
 deploy_postgres() {
   local namespace="$1"
-  echo "Deploying PostgreSQL to namespace '$namespace'..."
-  kubectl delete -f "$pvc_file" -n "$namespace"
+  echo "Deleting PostgreSQL to namespace '$namespace'..."
+  kubectl delete -f "$postgres_deployment_file" -n "$namespace"
   if [ $? -ne 0 ]; then
-    echo "Failed to delete PVC to namespace ${namespace}"
+    echo "Failed to delete postgres deployment  to namespace ${namespace}"
   fi
   kubectl delete -f "$secret_file" -n "$namespace"
     if [ $? -ne 0 ]; then
     echo "Failed to delete Secret  to namespace ${namespace}"
   fi
-  kubectl delete -f "$postgres_deployment_file" -n "$namespace"
+  kubectl delete -f "$pvc_file" -n "$namespace"
   if [ $? -ne 0 ]; then
-    echo "Failed to delete PostgreSQL Deployment to namespace ${namespace}"
+    echo "Failed to delete PVC to namespace ${namespace}"
   fi
-  echo "PostgreSQL deployment started in namespace '$namespace'."
+  echo "PostgreSQL deployment started deleting in namespace '$namespace'."
 }
 
 # Main deployment sequence
@@ -34,5 +36,5 @@ for namespace in "${namespaces[@]}"; do
   deploy_postgres "$namespace"
 done
 
-echo "PostgreSQL deployment process completed in all specified namespaces."
+echo "PostgreSQL deployment deletion  process completed in all specified namespaces."
 
